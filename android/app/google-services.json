@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93925878379",
+    "project_id": "hackathon-b00d8",
+    "storage_bucket": "hackathon-b00d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93925878379:android:555177c4a2696eef109f2e",
+        "android_client_info": {
+          "package_name": "com.example.tripsathihackathon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaWiMsvODDDihS7ZZaovLDQWIsSpNvX10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
