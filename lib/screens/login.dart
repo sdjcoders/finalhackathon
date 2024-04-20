@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tripsathihackathon/auth/authmethods.dart';
 import 'package:tripsathihackathon/screens/home.dart';
+import 'package:tripsathihackathon/screens/navbar.dart';
 import 'package:tripsathihackathon/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -29,8 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().loginInUsers(
         email: _emailController.text, password: _passwordController.text);
     if (res == "success") {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const homepage()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const PersonalFeed()));
     } else {
       // Show error message
       showSnackBar(res, context);

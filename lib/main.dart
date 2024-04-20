@@ -135,6 +135,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tripsathihackathon/firebase_options.dart';
 import 'package:tripsathihackathon/providers/user_provider.dart';
 import 'package:tripsathihackathon/screens/home.dart';
+import 'package:tripsathihackathon/screens/navbar.dart';
 import 'package:tripsathihackathon/screens/onboard_buttons.dart';
 import 'package:tripsathihackathon/screens/onboarding_screens.dart';
 
@@ -172,7 +173,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return const homepage();
+                return const PersonalFeed();
               } else {
                 // Check if onboarding is completed
                 bool isOnboardingCompleted =

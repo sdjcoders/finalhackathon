@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tripsathihackathon/auth/authmethods.dart';
 import 'package:tripsathihackathon/screens/home.dart';
 import 'package:tripsathihackathon/screens/login.dart';
+import 'package:tripsathihackathon/screens/navbar.dart';
 import 'package:tripsathihackathon/utils/utils.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -262,55 +263,6 @@ class _SignupScreenState extends State<SignupScreen>
             controller: _bioController,
           ),
           SizedBox(height: screenSize.height * 0.022),
-          //  _buildTextField(
-          //   hintText: 'Enter Phone number',
-          //   suffixIcon: Icon(Icons.phone),
-          //   onChanged: (_) {},
-          //   keyboardType: TextInputType.text,
-          //   controller: _phonecontroller,
-
-          // ),
-          //  SizedBox(height: screenSize.height * 0.022),
-          //  ElevatedButton(onPressed: ()async{
-
-          //   await FirebaseAuth.instance.verifyPhoneNumber(verificationCompleted: (PhoneAuthCredential credential){},
-          //   verificationFailed: (FirebaseAuthException ex){},
-          //   codeSent: (String verificationId, int? ResendToken) {},
-          //    codeAutoRetrievalTimeout:(String verificationid){},
-          //    phoneNumber: _phonecontroller.text.toString()
-
-          //    );
-          //  },
-          //   child: Text("Verify phone number")),
-          //   SizedBox(height: screenSize.height * 0.022),
-
-          //  _buildTextField(
-          //   hintText: 'Enter OTP',
-          //   suffixIcon: Icon(Icons.view_agenda),
-          //   onChanged: (_) {},
-          //   keyboardType: TextInputType.number,
-          //   controller: _otpcontroller,
-          // ),
-
-          //    SizedBox(height: screenSize.height * 0.022),
-          //    ElevatedButton(onPressed: () async{
-
-          //     try {
-          //       PhoneAuthCredential credential =
-          //       await PhoneAuthProvider.credential
-          //       (verificationId: verificationId,
-          //       smsCode :_otpcontroller.text.toString() );
-          //       FirebaseAuth.instance.signInWithCredential(credential).then((value){
-          //           Text('Phone number verified');
-
-          //       });
-
-          //     } catch (ex) {
-          //          print("Error verifying OTP: $ex");
-
-          //     }
-          //    }, child: Text('Verify otp')),
-
           _buildSignupButton(screenSize),
           SizedBox(height: screenSize.height * 0.008),
         ],
@@ -485,8 +437,8 @@ class _SignupScreenState extends State<SignupScreen>
     if (res != 'success') {
       showSnackBar(res, context);
     } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const homepage()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const PersonalFeed()));
     }
 
     if (!_emailError) {
