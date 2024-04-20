@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gonomad/features/auth/screen/profile_screen.dart';
+
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/view_profile_screen.dart';
 
 // class SearchScreen extends StatefulWidget {
 //   const SearchScreen({Key? key});

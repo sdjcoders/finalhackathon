@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gonomad/features/auth/screen/profile_screen.dart';
+
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/view_profile_screen.dart';
 
 class FollowerCount extends StatefulWidget {
   final String uid;
