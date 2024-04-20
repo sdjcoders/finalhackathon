@@ -14,6 +14,7 @@ import 'package:tripsathihackathon/models/community_model.dart';
 import 'package:tripsathihackathon/models/cpost_model.dart';
 import 'package:tripsathihackathon/providers/firebase_storage.dart';
 import 'package:tripsathihackathon/screens/onboard_buttons.dart';
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/Followbutton.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/about_us.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/followers_list.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/following_list.dart';
