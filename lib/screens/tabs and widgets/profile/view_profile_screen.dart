@@ -14,7 +14,8 @@ import 'package:tripsathihackathon/models/community_model.dart';
 import 'package:tripsathihackathon/models/cpost_model.dart';
 import 'package:tripsathihackathon/providers/firebase_storage.dart';
 import 'package:tripsathihackathon/screens/onboard_buttons.dart';
-import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/widgets/Followbutton.dart';
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/Followbutton.dart';
+
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/about_us.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/followers_list.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/following_list.dart';
@@ -644,8 +645,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                   title: Text('Expense Tracker'),
                   onTap: () {
                     Navigator.pop(context); // Close the bottom drawer
-                      Navigator.push(
-                     context,
+                    Navigator.push(
+                      context,
                       MaterialPageRoute(
                           builder: (context) =>
                               Expenses()), // Navigate to Expenses screen
