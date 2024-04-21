@@ -32,6 +32,7 @@ class _FeedScreenState extends State<homepage>
   late TabController _tabController;
   String? uid;
   late StreamSubscription<User?> _userStreamSubscription;
+  Offset _offset = Offset(0, 0);
 
   @override
   void initState() {
@@ -58,108 +59,129 @@ class _FeedScreenState extends State<homepage>
       statusBarIconBrightness: Brightness.dark,
     ));
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 1,
-        title: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: Text(
-              'Tripsaathi',
-              style: GoogleFonts.lobster(
-                color: Colors.black,
-                fontSize: 26.0,
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 1,
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 25),
+              child: Text(
+                'Tripsaathi',
+                style: GoogleFonts.lobster(
+                  color: Colors.black,
+                  fontSize: 26.0,
+                ),
               ),
             ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                );
+              },
+              icon: const Icon(
+                Icons.search_rounded,
+                color: Color.fromARGB(255, 0, 0, 0),
+                size: 30,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              },
+              icon: const Icon(
+                Icons.messenger_outline_rounded,
+              ),
+              color: Colors.black,
+            ),
+          ],
+          flexibleSpace: ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 9,
+                sigmaY: 9,
+              ),
+              child: Container(
+                color: Colors.white.withOpacity(0.7),
+              ),
+            ),
+          ),
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: [
+              Tab(text: 'For You'),
+              Tab(text: 'Following'),
+              Tab(text: 'Community'),
+            ],
+          ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchScreen()),
-              );
-            },
-            icon: const Icon(
-              Icons.search_rounded,
-              color: Color.fromARGB(255, 0, 0, 0),
-              size: 30,
+        drawer: const CommunityList(),
+        body: Stack(
+          children: [
+            TabBarView(
+              controller: _tabController,
+              children: [
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('posts')
+                      .orderBy('datePublished', descending: true)
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final snap = snapshot.data!.docs[index].data();
+                        return PostCard(snap: snap);
+                      },
+                      cacheExtent: MediaQuery.of(context).size.height * 8,
+                    );
+                  },
+                ),
+                _buildFollowingTab(),
+                CommmunityFeedScreen(),
+              ],
             ),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
-            },
-            icon: const Icon(
-              Icons.messenger_outline_rounded,
+            Positioned(
+              bottom: kBottomNavigationBarHeight + 50, // Adjusted position
+              right: 16,
+              child: Draggable(
+                feedback: FloatingActionButton(
+                  onPressed: () {},
+                  child: const Icon(Icons.message),
+                  backgroundColor: Colors.blue,
+                ),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChatPage()));
+                  },
+                  child: const Icon(Icons.message),
+                  backgroundColor: Colors.blue,
+                ),
+                onDraggableCanceled: (Velocity velocity, Offset offset) {
+                  setState(() {
+                    _offset = offset;
+                  });
+                },
+              ),
             ),
-            color: Colors.black,
-          ),
-        ],
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 9,
-              sigmaY: 9,
-            ),
-            child: Container(
-              color: Colors.white.withOpacity(0.7),
-            ),
-          ),
-        ),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'For You'),
-            Tab(text: 'Following'),
-            Tab(text: 'Community'),
           ],
         ),
-      ),
-      drawer: const CommunityList(),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('posts')
-                .orderBy('datePublished', descending: true)
-                .snapshots(),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final snap = snapshot.data!.docs[index].data();
-                  return PostCard(snap: snap);
-                },
-                cacheExtent: MediaQuery.of(context).size.height * 8,
-              );
-            },
-          ),
-          _buildFollowingTab(),
-          CommmunityFeedScreen()
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ChatPage()),
-          );
-        },
-        child: const Icon(Icons.message),
-        backgroundColor: Colors.blue,
       ),
     );
   }

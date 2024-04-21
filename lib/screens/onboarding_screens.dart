@@ -125,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0), // Rounded corners
               ),
-              // primary: Colors.blue, // Blue color
+              backgroundColor: Colors.blue, // Blue color
               textStyle: TextStyle(color: Colors.white), // Text color
             ),
             child: Text(
