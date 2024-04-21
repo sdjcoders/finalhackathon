@@ -7,6 +7,7 @@ import 'package:tripsathihackathon/community/constants/failure.dart';
 import 'package:tripsathihackathon/community/constants/firebase_Constants.dart';
 import 'package:tripsathihackathon/community/constants/typedefs.dart';
 import 'package:tripsathihackathon/models/community_model.dart';
+import 'package:tripsathihackathon/models/cpost_model.dart';
 import 'package:tripsathihackathon/providers/firebase_providers.dart';
 
 final CommunityRepositoryProvider = Provider((ref) {
@@ -104,21 +105,21 @@ class CommunityRepository {
     }
   }
 
-  // Stream<List<Post>> getCommunityPosts(String name) {
-  //   return _posts
-  //       .where('communityName', isEqualTo: name)
-  //       .orderBy('createdAt', descending: true)
-  //       .snapshots()
-  //       .map(
-  //         (event) => event.docs
-  //             .map(
-  //               (e) => Post.fromMap(
-  //                 e.data() as Map<String, dynamic>,
-  //               ),
-  //             )
-  //             .toList(),
-  //       );
-  // }
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _posts
+        .where('communityName', isEqualTo: name)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
 
   Stream<List<Community>> searchCommunity(String query) {
     return _communities

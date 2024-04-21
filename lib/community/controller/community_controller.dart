@@ -254,6 +254,7 @@ import 'package:tripsathihackathon/community/constants/utils.dart';
 import 'package:tripsathihackathon/community/repository/community_repository.dart';
 import 'package:tripsathihackathon/community/repository/storage_repository.dart';
 import 'package:tripsathihackathon/models/community_model.dart';
+import 'package:tripsathihackathon/models/cpost_model.dart';
 
 final userCommunitiesProvider = StreamProvider(
   (ref) {
@@ -284,9 +285,9 @@ final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(CommunityControllerProvider.notifier).searchCommunity(query);
 });
 
-// final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
-//   return ref.read(CommunityControllerProvider.notifier).getCommunityPosts(name);
-// });
+final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
+  return ref.read(CommunityControllerProvider.notifier).getCommunityPosts(name);
+});
 
 final allCommunitiesProvider = StreamProvider<List<Community>>((ref) {
   final communityController = ref.watch(CommunityControllerProvider.notifier);
@@ -420,9 +421,9 @@ class CommunityController extends StateNotifier<bool> {
   // Stream<List<Community>> searchCommunity(String query) {
   //   return _communityRepository.searchCommunityAutoSuggest(query);
   // }
-  // Stream<List<Post>> getCommunityPosts(String name) {
-  //   return _communityRepository.getCommunityPosts(name);
-  // }
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _communityRepository.getCommunityPosts(name);
+  }
 
   Stream<List<Community>> searchCommunity(String query) {
     return _communityRepository.searchCommunity(query);

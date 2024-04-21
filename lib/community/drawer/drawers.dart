@@ -9,6 +9,7 @@ import 'package:tripsathihackathon/community/constants/loader.dart';
 import 'package:tripsathihackathon/community/controller/community_controller.dart';
 import 'package:tripsathihackathon/community/screens/community_profile_screen.dart';
 import 'package:tripsathihackathon/community/screens/create_community_screen.dart';
+import 'package:tripsathihackathon/community/screens/search_delegates.dart';
 import 'package:tripsathihackathon/models/community_model.dart';
 
 class CommunityList extends ConsumerWidget {
@@ -67,10 +68,10 @@ class CommunityList extends ConsumerWidget {
               ),
               InkWell(
                 onTap: () {
-                  // showSearch(
-                  //   context: context,
-                  //   delegate: SearchCommunityDelegate(ref: ref),
-                  // );
+                  showSearch(
+                    context: context,
+                    delegate: SearchCommunityDelegate(ref: ref),
+                  );
                 },
                 child: Container(
                   padding:

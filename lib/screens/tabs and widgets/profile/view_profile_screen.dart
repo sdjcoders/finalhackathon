@@ -14,7 +14,7 @@ import 'package:tripsathihackathon/models/community_model.dart';
 import 'package:tripsathihackathon/models/cpost_model.dart';
 import 'package:tripsathihackathon/providers/firebase_storage.dart';
 import 'package:tripsathihackathon/screens/onboard_buttons.dart';
-import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/Followbutton.dart';
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/widgets/Followbutton.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/about_us.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/followers_list.dart';
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/following_list.dart';
@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             Container(
                               height: 150,
                               width: double.infinity,
-                              color: Color.fromARGB(255, 15, 139, 108),
+                              color: Color.fromARGB(255, 4, 89, 142),
                             ),
                             FirebaseAuth.instance.currentUser!.uid == widget.uid
                                 ? Positioned(
@@ -309,28 +309,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ],
                         ),
                         // Container(
-                        //   alignment: Alignment.centerLeft,
-                        //   padding: const EdgeInsets.only(top: 15.0),
-                        //   child: Text(
-                        //     userData['username'],
-                        //     style: const TextStyle(
-                        //       fontWeight: FontWeight.bold,
-                        //       fontSize: 18,
-                        //     ),
-                        //   ),
-                        // ),
-                        // Container(
-                        //   alignment: Alignment.centerLeft,
-                        //   padding: const EdgeInsets.only(top: 1.0),
-                        //   child: Text(
-                        //     userData['bio'],
-                        //   ),
-                        // ),
-                        // Container(
-                        //   alignment: Alignment.centerLeft,
-                        //   padding: const EdgeInsets.only(top: 1.0),
-                        //   child: Text('score = $score'),
-                        // ),
                       ],
                     ),
                   ),
@@ -746,39 +724,19 @@ class _ProfileScreenState extends State<ProfileScreen>
                   title: Text('Share this profile'),
                   onTap: () {
                     Navigator.pop(context); // Close the bottom drawer
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           Expenses()), // Navigate to Expenses screen
-                    // );
                   },
                 ),
                 Divider(),
                 ListTile(
                   leading: Icon(Icons.block),
                   title: Text('Block User'),
-                  onTap: () {
-                    // Navigate to Settings screen
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           EditProfileScreen(uid: widget.uid),
-                    //     ));
-                  },
+                  onTap: () {},
                 ),
                 Divider(),
                 ListTile(
                   leading: Icon(Icons.report),
                   title: Text('Report User'),
-                  onTap: () {
-                    // Navigate to Settings screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => SettingsScreen()),
-                    // );
-                  },
+                  onTap: () {},
                 ),
               ],
             ),
@@ -905,21 +863,21 @@ class _CommunitypostscreenState extends ConsumerState<Communitypostscreen> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: userCommunities.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final community = userCommunities[index];
-                      return ListTile(
-                        title: Text(community.name),
-                        onTap: () {
-                          setState(() {
-                            selectedCommunity = community.name;
-                          });
-                        },
-                      );
-                    },
-                  ),
+                ListView.builder(
+                  shrinkWrap:
+                      true, // Add shrinkWrap to ensure the list takes only necessary space
+                  itemCount: userCommunities.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final community = userCommunities[index];
+                    return ListTile(
+                      title: Text(community.name),
+                      onTap: () {
+                        setState(() {
+                          selectedCommunity = community.name;
+                        });
+                      },
+                    );
+                  },
                 ),
                 if (selectedCommunity != null)
                   Expanded(

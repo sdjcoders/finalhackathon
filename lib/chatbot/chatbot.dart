@@ -11,6 +11,6 @@ class chatbot extends StatefulWidget {
 class _chatbotState extends State<chatbot> {
   @override
   Widget build(BuildContext context) {
-    return Text('Hiii I am TripMan. How Can I help you');
+    return Center(child: Text('Hiii I am TripMan. How Can I help you'));
   }
 }

@@ -13,6 +13,7 @@ import 'package:tripsathihackathon/community/constants/loader.dart';
 import 'package:tripsathihackathon/community/controller/community_controller.dart';
 import 'package:tripsathihackathon/community/screens/community_profile_screen.dart';
 import 'package:tripsathihackathon/models/cpost_model.dart';
+import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/view_profile_screen.dart';
 
 class CPostCard extends ConsumerWidget {
   final Post post;
@@ -88,7 +89,7 @@ class CPostCard extends ConsumerWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 251, 251),
+            color: Color.fromARGB(255, 252, 250, 250),
           ),
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Row(
@@ -141,14 +142,14 @@ class CPostCard extends ConsumerWidget {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //       builder: (context) =>
-                                              //           ProfileScreen(
-                                              //             uid: currentUser.uid,
-                                              //           )),
-                                              // );
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProfileScreen(
+                                                          uid: currentUser.uid,
+                                                        )),
+                                              );
                                             },
                                             child: Text(
                                               'u/${post.username}',
@@ -335,7 +336,10 @@ class CPostCard extends ConsumerWidget {
                               ],
                             ),
                           ]),
-                    )
+                    ),
+                    Divider(
+                      thickness: 2,
+                    ),
                   ],
                 ),
               ),
