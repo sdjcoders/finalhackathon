@@ -51,7 +51,7 @@ dependencies:
   provider: ^6.1.1
   uuid: ^4.3.3
   firebase_app_check: ^0.2.1+13
-  intl: ^0.19.0
+  intl: ^0.18.0
   cached_memory_image: ^1.5.0
   cached_network_image: ^3.3.1
   flutter_cache_manager: ^3.3.1
@@ -82,7 +82,8 @@ dependencies:
   any_link_preview: ^2.0.0
   tuple: 2.0.2
   url_launcher: ^6.0.9
-
+  dash_chat_2: ^0.0.18
+  chat_gpt_sdk: ^2.2.5
 
 dev_dependencies:
   flutter_test:

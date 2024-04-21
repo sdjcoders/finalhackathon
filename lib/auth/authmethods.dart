@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tripsathihackathon/auth/storage_methods.dart';
 import 'package:tripsathihackathon/models/usermodel.dart' as model;
+import 'package:tripsathihackathon/chats/apis/apis.dart';
 // Import your APIs file
 
 class AuthMethods {
@@ -41,7 +42,7 @@ class AuthMethods {
 
         String photoUrl = await Storagemethods()
             .uploadImageToStorage('profilePics', file, false);
-        // await APIs.createUser(username, email, photoUrl);
+        await APIs.createUser(username, email, photoUrl);
 
         model.User user = model.User(
             uid: cred.user!.uid,

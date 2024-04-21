@@ -8,7 +8,7 @@ import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/view_pro
 
 List<Widget> homeScreenItems = [
   const homepage(),
-  chatbot(),
+  ChatPage(),
   const AddPostScreen(),
   Maping(),
   ProfileScreen(

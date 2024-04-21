@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tripsathihackathon/Chats/screens/home_screen.dart';
+import 'package:tripsathihackathon/chatbot/chatbot.dart';
 import 'package:tripsathihackathon/community%20post/controller/add_Cpost_controller.dart';
 import 'package:tripsathihackathon/community%20post/screens/cpost_card.dart';
 import 'package:tripsathihackathon/community/constants/error.dart';
@@ -83,7 +85,7 @@ class _FeedScreenState extends State<homepage>
             },
             icon: const Icon(
               Icons.search_rounded,
-              color: Color.fromARGB(255, 39, 36, 87),
+              color: Color.fromARGB(255, 0, 0, 0),
               size: 30,
             ),
           ),
@@ -91,7 +93,7 @@ class _FeedScreenState extends State<homepage>
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const homepage()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
               );
             },
             icon: const Icon(
@@ -148,6 +150,16 @@ class _FeedScreenState extends State<homepage>
           _buildFollowingTab(),
           CommmunityFeedScreen()
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ChatPage()),
+          );
+        },
+        child: const Icon(Icons.message),
+        backgroundColor: Colors.blue,
       ),
     );
   }
