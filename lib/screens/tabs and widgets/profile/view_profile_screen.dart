@@ -21,7 +21,7 @@ import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/followin
 import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/settings_screen.dart';
 import 'package:tripsathihackathon/utils/utils.dart';
 // Adjust the import path as needed
-
+import 'package:tripsathihackathon/expense_tracker/screens/expenses.dart';
 import 'package:tuple/tuple.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -644,12 +644,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                   title: Text('Expense Tracker'),
                   onTap: () {
                     Navigator.pop(context); // Close the bottom drawer
-                    //   Navigator.push(
-                    //  context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) =>
-                    //           Expenses()), // Navigate to Expenses screen
-                    // );
+                      Navigator.push(
+                     context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Expenses()), // Navigate to Expenses screen
+                    );
                   },
                 ),
                 Divider(),

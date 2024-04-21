@@ -15,8 +15,6 @@ import 'package:tripsathihackathon/community/constants/error.dart';
 import 'package:tripsathihackathon/community/constants/loader.dart';
 import 'package:tripsathihackathon/community/controller/community_controller.dart';
 import 'package:tripsathihackathon/community/drawer/drawers.dart';
-import 'package:tripsathihackathon/screens/tabs%20and%20widgets/profile/widgets/post_card.dart';
-import 'package:tripsathihackathon/screens/tabs%20and%20widgets/search_screen.dart';
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -76,23 +74,23 @@ class _FeedScreenState extends State<homepage>
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchScreen()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const SearchScreen()),
+              //  );
             },
             icon: const Icon(
               Icons.search_rounded,
-              color: Color.fromARGB(255, 39, 36, 87),
+              color: Color.fromARGB(255, 0, 0, 0),
               size: 30,
             ),
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const homepage()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+              // );
             },
             icon: const Icon(
               Icons.messenger_outline_rounded,
@@ -124,27 +122,34 @@ class _FeedScreenState extends State<homepage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('posts')
-                .orderBy('datePublished', descending: true)
-                .snapshots(),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final snap = snapshot.data!.docs[index].data();
-                  return PostCard(snap: snap);
-                },
-                cacheExtent: MediaQuery.of(context).size.height * 8,
-              );
-            },
-          ),
+          // StreamBuilder(
+          //   stream: FirebaseFirestore.instance
+          //       .collection('posts')
+          //       .orderBy('datePublished', descending: true)
+          //       .snapshots(),
+          //   builder: (context,
+          //       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(child: CircularProgressIndicator());
+          //     }
+          //     return ListView.builder(
+          //       physics: const AlwaysScrollableScrollPhysics(),
+          //       itemCount: snapshot.data!.docs.length,
+          //       itemBuilder: (context, index) {
+          //         final snap = snapshot.data!.docs[index].data();
+          //         return PostCard(snap: snap);
+          //       },
+          //       cacheExtent: MediaQuery.of(context).size.height * 8,
+          //     );
+          //   },
+          // )
+          //
+          //
+          //
+          //
+          // ,
+
+          Text('All post here'),
           _buildFollowingTab(),
           CommmunityFeedScreen()
         ],
@@ -153,51 +158,53 @@ class _FeedScreenState extends State<homepage>
   }
 
   Widget _buildFollowingTab() {
-    if (uid == null) {
-      return const SizedBox(); // Return an empty widget if uid is null
-    }
-    return StreamBuilder<DocumentSnapshot>(
-      stream:
-          FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
-      builder: (context, userSnapshot) {
-        if (userSnapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
-          return const Center(child: Text('User data not found.'));
-        }
-        List<dynamic> followingList = userSnapshot.data!.get('following') ?? [];
-        if (followingList.isEmpty) {
-          return Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle the follow action
-              },
-              child: Text('Follow  Users'),
-            ),
-          );
-        }
-        return StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('posts')
-              .where('uid', whereIn: followingList)
-              .orderBy('datePublished', descending: true)
-              .snapshots(),
-          builder: (context, postSnapshot) {
-            if (postSnapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return ListView.builder(
-              itemCount: postSnapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                final post = postSnapshot.data!.docs[index].data();
-                return PostCard(snap: post);
-              },
-            );
-          },
-        );
-      },
-    );
+    return Text('Following Post');
+    //   if (uid == null) {
+    //     return const SizedBox(); // Return an empty widget if uid is null
+    //   }
+    //   return StreamBuilder<DocumentSnapshot>(
+    //     stream:
+    //         FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
+    //     builder: (context, userSnapshot) {
+    //       if (userSnapshot.connectionState == ConnectionState.waiting) {
+    //         return const Center(child: CircularProgressIndicator());
+    //       }
+    //       if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
+    //         return const Center(child: Text('User data not found.'));
+    //       }
+    //       List<dynamic> followingList = userSnapshot.data!.get('following') ?? [];
+    //       if (followingList.isEmpty) {
+    //         return Center(
+    //           child: ElevatedButton(
+    //             onPressed: () {
+    //               // Handle the follow action
+    //             },
+    //             child: Text('Follow  Users'),
+    //           ),
+    //         );
+    //       }
+    //       return StreamBuilder<QuerySnapshot>(
+    //         stream: FirebaseFirestore.instance
+    //             .collection('posts')
+    //             .where('uid', whereIn: followingList)
+    //             .orderBy('datePublished', descending: true)
+    //             .snapshots(),
+    //         builder: (context, postSnapshot) {
+    //           if (postSnapshot.connectionState == ConnectionState.waiting) {
+    //             return const Center(child: CircularProgressIndicator());
+    //           }
+    //           return ListView.builder(
+    //             itemCount: postSnapshot.data!.docs.length,
+    //             itemBuilder: (context, index) {
+    //               final post = postSnapshot.data!.docs[index].data();
+    //               return PostCard(snap: post);
+    //             },
+    //           );
+    //         },
+    //       );
+    //     },
+    //   );
+    // }
   }
 }
 
